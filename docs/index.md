@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: TinyInstaller
-  text: Deploy Windows or Linux Remote Desktop on VPS in Minutes
-  tagline: Install and configure remote desktop environments automatically without rescue mode or VNC.
+  text: Automated OS Deployment for VPS
+  tagline: Install or reinstall Windows and Linux operating systems directly from your existing server. No rescue mode, VNC, or manual deployment required.
   actions:
     - theme: brand
       text: Getting Started
