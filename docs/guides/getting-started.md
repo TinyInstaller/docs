@@ -2,48 +2,54 @@
 
 ## What is TinyInstaller?
 
-TinyInstaller is an automated deployment platform that allows you to install Windows or Linux remote desktop environments on supported VPS providers.
+TinyInstaller is an automated operating system deployment platform for VPS environments.
 
-Instead of using rescue mode, VNC consoles, or manual operating system installation procedures, TinyInstaller performs the deployment directly from an existing Linux server.
+It allows you to install or reinstall Windows and Linux operating systems directly from an existing VPS without using rescue mode, VNC consoles, or manual installation procedures.
 
-The deployment process is designed to be simple, fast, and provider-independent.
+---
 
 ## How It Works
 
-TinyInstaller runs on a VPS that already has a supported Linux distribution installed.
+TinyInstaller runs directly on your existing VPS and automates the operating system deployment process.
 
-The deployment process will:
+During deployment, TinyInstaller will:
 
-1. Deploy the selected operating system.
+1. Download and prepare the selected operating system.
 2. Configure disk partitions automatically.
 3. Configure networking settings.
-4. Enable remote desktop access.
-5. Reboot into the newly installed operating system.
+4. Install remote access services when applicable.
+5. Configure the boot environment.
+6. Reboot into the newly installed operating system.
 
-Once the deployment is complete, the server is ready for remote access.
+Once deployment is complete, the server is ready for use.
+
+---
 
 ## Requirements
 
-Before using TinyInstaller, ensure that your VPS meets the following requirements:
+Before using TinyInstaller, ensure that your VPS meets the following requirements.
 
-### Supported Operating Systems
+### Supported Source Operating Systems
 
-The deployment script must be executed on:
+TinyInstaller can be executed from:
 
 - Ubuntu
 - Debian
+- Windows Server
+- Windows Desktop editions
 
-### Required Permissions
+### Required Access
 
 You must have:
 
-- Root access
+- Root access on Linux systems, or
+- Administrator privileges on Windows systems
 - Internet connectivity
 - A supported virtualization platform
 
 ### Supported Virtualization Platforms
 
-TinyInstaller supports:
+TinyInstaller currently supports:
 
 - KVM
 - Hyper-V
@@ -52,10 +58,12 @@ TinyInstaller supports:
 
 ### Unsupported Platforms
 
-TinyInstaller does not support:
+TinyInstaller does not currently support:
 
 - OpenVZ
-- ARM-based processors
+- ARM-based systems
+
+---
 
 ## Available Operating Systems
 
@@ -63,41 +71,46 @@ TinyInstaller currently supports the following operating systems.
 
 ### Windows
 
-- Windows Server 2012
+- Windows Server 2012 R2
 - Windows Server 2016
 - Windows Server 2019
 - Windows Server 2022
-- Windows 10 LTSC 2019
-- Windows 10 LTSC 2021
-- Windows 10 Pro
+- ...
 
 ### Linux
 
-- Linux Mint XFCE (RDP enabled)
+- Linux Mint XFCE
 - Debian 12
+- Ubuntu 22
+- ...
 
-Additional operating systems may be added in future releases.
+
+---
 
 ## Automatic Configuration
 
-During deployment, TinyInstaller automatically configures:
+To reduce manual setup, TinyInstaller automatically configures common system components during deployment:
 
 - Network settings
 - Remote Desktop services
 - Firewall rules
-- System boot configuration
+- Boot configuration
 
-No manual post-installation setup is required in most cases.
+Most deployments do not require additional post-installation steps.
+
+---
 
 ## Licensing
 
-TinyInstaller provides deployment services only.
+TinyInstaller provides deployment and automation services only.
 
 Operating system licenses are not included.
 
-If the selected operating system requires activation or licensing, you are responsible for obtaining and activating a valid license.
+If the selected operating system requires activation or licensing, you are responsible for obtaining and activating a valid license from the appropriate vendor.
 
-## Recommended Guides
+---
+
+## Deployment Guides
 
 Choose the guide that matches your VPS provider:
 
@@ -105,15 +118,17 @@ Choose the guide that matches your VPS provider:
 - Linode Deployment
 - Generic Linux VPS Deployment
 
-If your provider is not listed, start with the Generic Linux VPS guide.
+If your provider is not listed, start with the Generic Linux VPS Deployment guide.
+
+---
 
 ## Need Help?
 
 If you encounter issues during deployment:
 
 - Verify that your virtualization platform is supported.
-- Confirm that you are using Ubuntu or Debian as the source system.
-- Check that root access is available.
-- Review the troubleshooting section of the documentation.
+- Confirm that the source system is running Ubuntu or Debian.
+- Ensure that root access is available.
+- Review the troubleshooting documentation.
 
-You can also consult the API documentation for advanced integrations and automation workflows.
+For advanced integrations and automation workflows, refer to the API documentation.
