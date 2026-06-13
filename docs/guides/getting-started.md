@@ -23,6 +23,16 @@ During deployment, TinyInstaller will:
 
 Once deployment is complete, the server is ready for use.
 
+::: danger Data Loss Warning
+
+TinyInstaller performs a clean operating system deployment.
+
+Existing operating systems, applications, configurations, and data on the target server may be permanently removed during deployment.
+
+Always back up important data before proceeding.
+
+:::
+
 ---
 
 ## Requirements
