@@ -6,7 +6,6 @@ TinyInstaller is an automated operating system deployment platform for VPS envir
 
 It allows you to install or reinstall Windows and Linux operating systems directly from an existing VPS without using rescue mode, VNC consoles, or manual installation procedures.
 
----
 
 ## How It Works
 
@@ -33,7 +32,6 @@ Always back up important data before proceeding.
 
 :::
 
----
 
 ## Requirements
 
@@ -73,7 +71,6 @@ TinyInstaller does not currently support:
 - OpenVZ
 - ARM-based systems
 
----
 
 ## Available Operating Systems
 
@@ -95,7 +92,6 @@ TinyInstaller currently supports the following operating systems.
 - ...
 
 
----
 
 ## Automatic Configuration
 
@@ -108,7 +104,6 @@ To reduce manual setup, TinyInstaller automatically configures common system com
 
 Most deployments do not require additional post-installation steps.
 
----
 
 ## Licensing
 
@@ -118,7 +113,6 @@ Operating system licenses are not included.
 
 If the selected operating system requires activation or licensing, you are responsible for obtaining and activating a valid license from the appropriate vendor.
 
----
 
 ## Deployment Guides
 
@@ -130,7 +124,6 @@ Choose the guide that matches your VPS provider:
 
 If your provider is not listed, start with the Generic Linux VPS Deployment guide.
 
----
 
 ## Need Help?
 
