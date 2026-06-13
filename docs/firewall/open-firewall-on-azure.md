@@ -1,0 +1,2 @@
+﻿# Open Firewall on Azure
+
