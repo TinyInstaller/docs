@@ -43,26 +43,38 @@ DISM /online /Set-Edition:ServerDatacenter /ProductKey:W3GGN-FT8W3-Y4M27-J84CP-Q
 
 ### Windows 2016 Datacenter
 
-`DISM /online /Set-Edition:ServerDatacenter /ProductKey:CB7KF-BWN84-R7R2Y-793K2-8XDDG /AcceptEula`
+```bat
+DISM /online /Set-Edition:ServerDatacenter /ProductKey:CB7KF-BWN84-R7R2Y-793K2-8XDDG /AcceptEula
+```
 
 ### Windows 2019 Datacenter
 
-`DISM /online /Set-Edition:ServerDatacenter /ProductKey:WMDGN-G9PQG-XVVXX-R3X43-63DFG /AcceptEula` 
+```bat
+DISM /online /Set-Edition:ServerDatacenter /ProductKey:WMDGN-G9PQG-XVVXX-R3X43-63DFG /AcceptEula
+``` 
 
 ### Windows 2022 Datacenter
 
-`DISM /online /Set-Edition:ServerDatacenter /ProductKey:WX4NM-KYWYW-QJJR4-XV3QB-6VM33 /AcceptEula` 
+```bat
+DISM /online /Set-Edition:ServerDatacenter /ProductKey:WX4NM-KYWYW-QJJR4-XV3QB-6VM33 /AcceptEula
+``` 
 
 ### Windows 2022 Standard
 
-`DISM /online /Set-Edition:ServerStandard /ProductKey:VDYBN-27WPP-V4HQT-9VMD4-VMK7H /AcceptEula`
+```bat
+DISM /online /Set-Edition:ServerStandard /ProductKey:VDYBN-27WPP-V4HQT-9VMD4-VMK7H /AcceptEula
+```
 
 ### Windows 2025 Datacenter
 
-`DISM /online /Set-Edition:ServerDatacenter /ProductKey:D764K-2NDRG-47T6Q-P8T8W-YP6DF /AcceptEula`
+```bat
+DISM /online /Set-Edition:ServerDatacenter /ProductKey:D764K-2NDRG-47T6Q-P8T8W-YP6DF /AcceptEula
+```
 
-Note:
+::: warning Note
 This process only changes the Windows Server edition.
 It does NOT activate Windows and does NOT provide a license.
 You must purchase a valid Windows Server license from Microsoft or an authorized reseller to activate the system.
+:::
+
 
