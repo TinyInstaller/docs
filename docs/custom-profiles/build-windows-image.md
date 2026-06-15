@@ -135,9 +135,17 @@ Generate the boot configuration.
 bcdboot "$winDrive\Windows" /s $bootDrive /f ALL /offline
 ```
 
-## Install Drivers (Optional)
+## Install Required Platform Drivers
 
 Additional drivers may be injected offline using DISM.
+
+> [!IMPORTANT]
+> The image must contain drivers compatible with the target virtualization platform.
+>
+> For KVM-based providers such as Vultr, Linode, DigitalOcean, Hetzner Cloud, OpenStack, Proxmox, and most other QEMU/KVM environments, VirtIO storage drivers are typically required.
+>
+> Without the required storage driver, Windows may fail to detect the boot disk and will not boot after deployment.
+
 
 ```powershell
 dism /Image:$winDrive `
