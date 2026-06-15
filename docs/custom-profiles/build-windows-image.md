@@ -27,7 +27,7 @@ zstd -19 windows.raw
 
 The resulting `.raw.zst` file can be used directly in a Custom Profile.
 
-## Option 2: Build a Clean Image from Installation Media
+# Option 2: Build a Clean Image from Installation Media
 
 TinyInstaller uses an offline installation process similar to Windows Setup.
 
@@ -38,98 +38,159 @@ This method does not require:
 - Entering Audit Mode
 - Running Sysprep manually
 
-Instead, Windows is applied directly from `install.wim` to a virtual disk.
+Because Windows is applied directly from `install.wim`, the resulting installation is already in a generalized state and is ready for deployment.
 
-### Requirements
+## Requirements
 
 - Windows installation ISO
 - PowerShell
 - A Windows machine or virtual machine
 - Sufficient disk space
 
-### Create a Virtual Disk
+## Choose an Image Index
 
-Create a fixed-size VHD.
-
-A 15 GB disk is sufficient for most Windows editions.
+Before applying the image, determine which Windows edition you want to install.
 
 ```powershell
-New-VHD `
-    -Path .\windows.vhd `
-    -SizeBytes 15GB `
-    -Fixed
+Get-WindowsImage -ImagePath D:\sources\install.wim
 ```
 
-Mount the VHD:
+or
 
 ```powershell
-Mount-VHD .\windows.vhd
+dism /Get-ImageInfo /ImageFile:D:\sources\install.wim
 ```
 
-Initialize and format the disk.
+Make note of the image index corresponding to the desired edition (for example, Windows 11 Pro).
 
-### Apply Windows
+## Create a Virtual Disk
 
-Mount the Windows ISO and locate `install.wim`.
+The following example creates a dynamically expanding 15 GB VHD.
 
-Apply the desired edition:
+The example uses an MBR partition layout for maximum compatibility.
 
 ```powershell
-dism /Apply-Image `
-    /ImageFile:D:\sources\install.wim `
-    /Index:1 `
-    /ApplyDir:W:\
+$vhdPath = "C:\windows.vhd"
+
+@"
+create vdisk file="$vhdPath" maximum=15360 type=expandable
+select vdisk file="$vhdPath"
+attach vdisk
+"@ | diskpart
+
+$disk = Get-DiskImage -ImagePath $vhdPath | Get-Disk
+$diskNumber = $disk.Number
+
+Initialize-Disk -Number $diskNumber -PartitionStyle MBR
+
+$p1 = New-Partition `
+    -DiskNumber $diskNumber `
+    -Size 300MB `
+    -AssignDriveLetter
+
+Format-Volume `
+    -Partition $p1 `
+    -FileSystem FAT32 `
+    -NewFileSystemLabel BOOT `
+    -Confirm:$false
+    
+Set-Partition `
+    -DiskNumber $diskNumber `
+    -PartitionNumber $p1.PartitionNumber `
+    -IsActive $true
+
+$p2 = New-Partition `
+    -DiskNumber $diskNumber `
+    -UseMaximumSize `
+    -AssignDriveLetter
+
+
+
+Format-Volume `
+    -Partition $p2 `
+    -FileSystem NTFS `
+    -NewFileSystemLabel Windows `
+    -Confirm:$false
+
+$bootDrive = ($p1 | Get-Volume).DriveLetter + ":"
+$winDrive  = ($p2 | Get-Volume).DriveLetter + ":"
 ```
 
-Replace:
+## Apply Windows
 
-- `D:` with the mounted ISO drive
-- `W:` with the mounted Windows partition
-
-### Create Boot Files
-
-Generate boot files:
+Apply the selected Windows image to the virtual disk.
 
 ```powershell
-bcdboot W:\Windows /s S: /f UEFI
+dism /apply-image `
+     /imagefile:D:\sources\install.wim `
+     /index:1 `
+     /applydir:$winDrive
 ```
 
-### Install Drivers (Optional)
+Replace the image index with the edition selected in the previous step.
 
-If required, additional drivers may be injected offline using DISM.
+## Create Boot Files
 
-Example:
+Generate the boot configuration.
 
 ```powershell
-dism /Image:W:\ `
+bcdboot "$winDrive\Windows" /s $bootDrive /f ALL /offline
+```
+
+## Install Drivers (Optional)
+
+Additional drivers may be injected offline using DISM.
+
+```powershell
+dism /Image:$winDrive `
      /Add-Driver `
      /Driver:C:\Drivers `
      /Recurse
 ```
 
-### Capture the Image
+## Additional Customizations (Optional)
 
-After the image has been prepared:
+Additional packages, features, or customizations can be applied before finalizing the image.
+
+Examples:
 
 ```powershell
-Dismount-VHD .\windows.vhd
+dism /Image:$winDrive `
+     /Add-Package `
+     /PackagePath:update.cab
 ```
 
-The VHD is now ready for use.
+```powershell
+dism /Image:$winDrive `
+     /Enable-Feature `
+     /FeatureName:NetFx3
+```
 
-### Convert to RAW
+## Finalize the Image
+
+Detach the virtual disk after all modifications have been completed.
+
+```powershell
+Dismount-DiskImage -ImagePath $vhdPath
+```
+
+## Convert to RAW
+
+The virtual disk must be detached before conversion.
 
 ```bash
 qemu-img convert -O raw windows.vhd windows.raw
 ```
 
-### Compress
+## Compress
+
+Compress the RAW image using Zstandard.
 
 ```bash
 zstd -19 windows.raw
 ```
 
-The resulting `.raw.zst` image can be uploaded and used directly in a Custom Profile.
+The resulting `.raw.zst` file can be uploaded and used directly in a TinyInstaller Custom Profile.
 
 ## Why Build Your Own Image?
 
