@@ -104,8 +104,6 @@ $p2 = New-Partition `
     -UseMaximumSize `
     -AssignDriveLetter
 
-
-
 Format-Volume `
     -Partition $p2 `
     -FileSystem NTFS `
