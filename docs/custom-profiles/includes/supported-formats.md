@@ -1,3 +1,11 @@
 - Raw disk images (`.raw`, `.dd`, `.img`)
-- Compressed raw images (`.gz`, `.zst`, `.xz`, `.bz2`)
-- Virtual machine images (`.qcow2`, `.vhdx`, `.vmdk`, and other formats supported by QEMU)
+- Any uncompressed virtual disk format supported by QEMU (`qemu-img`)
+
+Supported compressed formats:
+
+- `.raw.gz`
+- `.raw.zst`
+- `.raw.xz`
+- `.raw.bz2`
+
+Compression is supported only for raw disk images.

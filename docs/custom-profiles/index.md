@@ -23,6 +23,8 @@ TinyInstaller supports:
 
 For the best deployment performance, compressed raw images such as `.raw.zst` are recommended.
 
+Compression is supported only for raw disk images. Virtual disk formats such as QCOW2, VHDX, and VMDK should be uploaded uncompressed or converted to RAW before compression.
+
 ## Workflow
 
 Creating a custom profile typically involves the following steps:

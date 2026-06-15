@@ -27,17 +27,28 @@ For the best deployment performance, we recommend:
 .raw.zst
 ```
 
-Other supported formats include:
+Other supported image formats include:
 
 - RAW
 - QCOW2
 - VHD
 - VHDX
 - VMDK
-- GZip-compressed images (`.gz`)
-- Zstandard-compressed images (`.zst`)
-- XZ-compressed images (`.xz`)
-- BZip2-compressed images (`.bz2`)
+- Other formats supported by QEMU
+
+Supported compression formats for raw images:
+
+- GZip (`.gz`)
+- Zstandard (`.zst`)
+- XZ (`.xz`)
+- BZip2 (`.bz2`)
+
+Compression is supported only for raw disk images.
+
+> [!NOTE]
+> Compressed virtual disk formats such as `.qcow2.zst`,
+> `.vhdx.gz`, or `.vmdk.xz` are not supported.
+> Convert the image to RAW before compressing.
 
 ## Hosting Providers
 

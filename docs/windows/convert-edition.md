@@ -1,14 +1,12 @@
 ﻿# Convert Windows Server Evaluation to Non-Evaluation Edition (Datacenter / Standard)
 
-::: warning Licensing Notice
+> [!WARNING] Licensing Notice
+> The product keys used in this guide are official Microsoft generic setup keys used only for edition conversion.
+> 
+> These keys do **NOT** activate Windows and do **NOT** grant a license.
+> 
+> A valid Windows Server license is still required for activation.
 
-The product keys used in this guide are official Microsoft generic setup keys used only for edition conversion.
-
-These keys do **NOT** activate Windows and do **NOT** grant a license.
-
-A valid Windows Server license is still required for activation.
-
-:::
 
 ## Steps to do
 
@@ -69,14 +67,12 @@ DISM /online /Set-Edition:ServerStandard /ProductKey:VDYBN-27WPP-V4HQT-9VMD4-VMK
 DISM /online /Set-Edition:ServerDatacenter /ProductKey:D764K-2NDRG-47T6Q-P8T8W-YP6DF /AcceptEula
 ```
 
-::: tip Licensing Reminder
+> [!TIP] Licensing Reminder
+> This process only changes the Windows Server edition.
+> 
+> It does **NOT** activate Windows and does **NOT** provide a license.
+> 
+> You must purchase a valid Windows Server license from Microsoft or an authorized reseller to activate the system. 
 
-This process only changes the Windows Server edition.
-
-It does **NOT** activate Windows and does **NOT** provide a license.
-
-You must purchase a valid Windows Server license from Microsoft or an authorized reseller to activate the system.
-
-:::
 
 

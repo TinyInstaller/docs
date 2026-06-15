@@ -31,6 +31,10 @@ Supported image formats include:
 
 <!--@include: ./includes/supported-formats.md-->
 
+> [!NOTE]
+> Compression is supported only for raw disk images.
+> Formats such as `.qcow2.zst` or `.vhdx.gz` are not supported.
+
 Example:
 
 ```text

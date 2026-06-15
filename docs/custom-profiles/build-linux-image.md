@@ -124,4 +124,6 @@ For the best compatibility and deployment speed:
 
 - Prefer official cloud images whenever possible.
 - Use RAW images compressed with Zstandard (`.raw.zst`).
-- Avoid distributing compressed virtual disk formats such as `.qcow2.zst` or `.vhdx.gz`.
+- Compressed images are supported only for RAW disk images.
+- Avoid distributing compressed virtual disk formats such as `.qcow2.zst`, `.vhdx.gz`, or `.vmdk.xz`.
+- Convert the image to RAW before compression.
