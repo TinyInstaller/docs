@@ -11,7 +11,7 @@ hero:
       link: /guides/getting-started/
     - theme: alt
       text: API Docs
-      link: /api/
+      link: /api/build-install-command/
 
 features:
   - title: Remote Desktop Deployment
